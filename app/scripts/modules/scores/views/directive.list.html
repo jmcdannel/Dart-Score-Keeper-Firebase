@@ -1,0 +1,43 @@
+<section>
+  <div class="page-header">
+    <h1>Scores</h1>
+  </div>
+  <div class="list-group">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th ng-click="sortBy('title')">Record</th>
+          <th ng-click="sortBy('title')">Player</th>
+          <th ng-click="sortBy('title')">Game</th>
+          <th ng-click="sortBy('score')">Score</th>
+          <th>Date</th>
+        </tr>
+        <tr class="filters">
+          <th></th>
+          <th><input ng-model="filters.name" placeholder="Filter: enter name" id="name"></th>
+          <th><input ng-model="filters.game" placeholder="Filter: enter game" id="game"></th>
+          <th></th>
+          <th></th>
+        </td>
+      </thead>
+      <tbody>
+        <tr data-ui-sref="scores.edit({scoreId: score.$id})"
+            data-ng-repeat="
+              score in scores |
+              orderBy:filters.sortBy.field:filters.sortBy.descending |
+              filter: { player: filters.name, game: filters.game }">
+          <td data-ng-bind="score.title"></td>
+          <td data-ng-bind="score.player"></td>
+          <td data-ng-bind="score.game"></td>
+          <td data-ng-bind="score.score"></td>
+          <td data-ng-bind="score.created | date:'mediumDate'"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="scores.$resolved && !scores.length">
+    No scores yet, why don't you <a data-ui-sref="scores.create">create one</a>?
+  </div>
+  <button type="button" class="btn btn-primary" data-ui-sref="scores.create">Add New Score</button>
+</section>
