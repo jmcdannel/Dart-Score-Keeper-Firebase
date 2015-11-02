@@ -12,19 +12,31 @@ angular
       .state('scores', {
         abstract: true,
         url: '/scores',
-        template: '<ui-view/>'
+        views: {
+          'header': { templateUrl: app.view('core', 'header') },
+          'page': {template: '<div ui-view="content" />' },
+          'footer': { templateUrl: app.view('core', 'footer') }
+        }
       })
       .state('scores.list', {
         url: '/list',
-        templateUrl: app.view('scores', 'scores.list')
+        views: {
+          'header': { templateUrl: app.view('core', 'header') },
+          'content': { templateUrl: app.view('scores', 'scores.list') },
+          'footer': { templateUrl: app.view('core', 'footer') }
+        }
       })
       .state('scores.create', {
         url: '/create',
-        templateUrl: app.view('scores', 'scores.create')
+        views: {
+          'content': { templateUrl: app.view('scores', 'scores.create') }
+        }
       })
       .state('scores.edit', {
         url: '/edit/:scoreId',
-        templateUrl: app.view('scores', 'scores.edit')
+        views: {
+          'content': { templateUrl: app.view('scores', 'scores.edit') }
+        }
       });
 
   });

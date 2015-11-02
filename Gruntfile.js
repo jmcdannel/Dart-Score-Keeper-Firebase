@@ -256,7 +256,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: '<%= yeoman.dist %>/index.html',
+      html: '.tmp/index.html',
       options: {
         dest: '<%= yeoman.dist %>',
         flow: {
@@ -311,7 +311,8 @@ module.exports = function (grunt) {
     //   }
     // },
     // concat: {
-    //   dist: {}
+    //   dist: {
+    //   }
     // },
 
     imagemin: {
@@ -356,7 +357,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'firebaseDartsApp',
+          module: 'dartapp.scores',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
@@ -398,7 +399,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= yeoman.dist %>/index.html': '<%= yeoman.app %>/index.html'
+          '.tmp/index.html': '<%= yeoman.app %>/index.html'
         }
       }
     },
@@ -486,6 +487,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'includeSource:server',
     'wiredep',
     'concurrent:test',
     'autoprefixer',
@@ -495,7 +497,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'includeSource:dist',
+    'includeSource:server',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',

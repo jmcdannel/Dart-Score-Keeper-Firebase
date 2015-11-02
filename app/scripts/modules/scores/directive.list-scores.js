@@ -16,6 +16,7 @@ angular.module('dartapp.scores').directive('dsScoreList', ['ScoresFactory',
             descending: !scope.filters.sortBy.descending
           };
         };
+
       }
     };
 	}

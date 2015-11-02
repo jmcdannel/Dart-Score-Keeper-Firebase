@@ -15,13 +15,11 @@
   </head>
   <body ng-app="dartapp.scores">
 
-    <ng-include src="'scripts/modules/core/views/header.html'"></ng-include>
+    <div ui-view="header"></div>
 
-    <div class="container">
-      <ui-view/>
-    </div>
+    <div class="container" ui-view="page"></div>
 
-    <ng-include src="'scripts/modules/core/views/footer.html'"></ng-include>
+    <div ui-view="footer"></div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -37,8 +35,8 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <!-- endbuild -->
+    <script src="/scripts/app.js"></script>
     <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->
+    <!-- endbuild -->
 </body>
 </html>
