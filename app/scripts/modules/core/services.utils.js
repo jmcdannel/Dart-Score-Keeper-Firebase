@@ -3,9 +3,10 @@
   'use strict';
 
   angular
-    .module('dartapp.scores')
+    .module('dartapp.core')
     .service('Utils', Utils);
 
+	Utils.$inject = ['viewPathTemplate'];
   function Utils(viewPathTemplate) {
 
     this.view = _getViewPath;

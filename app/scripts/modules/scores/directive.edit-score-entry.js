@@ -7,34 +7,36 @@
     .module('dartapp.scores')
     .directive('dsEditScoreEntry', dsEditScoreEntry);
 
-  function dsEditScoreEntry($stateParams, $location, ScoresFactory, Utils) {
-  	return {
+	dsEditScoreEntry.$inject = ['$stateParams', '$location', 'scoresService', 'Utils'];
+  function dsEditScoreEntry($stateParams, $location, scoresService, Utils) {
+  	var directive = {
   		scope: {},
       templateUrl: Utils.view('scores', 'directive.edit'),
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-
-        scope.score = _getScore();
-  			scope.update = _update;
-  			scope.remove = _remove;
-
-        function _getScore() {
-          return ScoresFactory.getItem($stateParams.scoreId);
-        }
-
-        function _update() {
-          scope.score.$save();
-          $location.path('scores/list');
-  	    };
-
-        function _remove() {
-  	      scope.score.$remove();
-          $location.path('scores/list');
-  	    };
-
-
-      }
+      link: _link
     };
+
+    return directive;
+
+    function _link(scope, element, attrs) {
+      scope.score = _getScore();
+			scope.update = _update;
+			scope.remove = _remove;
+
+      function _getScore() {
+        return scoresService.getItem($stateParams.scoreId);
+      }
+
+      function _update() {
+        scope.score.$save();
+        $location.path('scores/list');
+      }
+
+      function _remove() {
+        scope.score.$remove();
+        $location.path('scores/list');
+      }
+    }
 
   }
 })();

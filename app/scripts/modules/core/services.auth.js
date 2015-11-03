@@ -4,9 +4,10 @@
 
 	//Scores service used for communicating with the scores REST endpoints
 	angular
-		.module('dartapp.scores')
+		.module('dartapp.core')
 		.service('AuthService', AuthService);
 
+	AuthService.$inject = ['$firebaseAuth', 'firebaseUrl'];
 	function AuthService($firebaseAuth, firebaseUrl) {
 
 	  var _ref = new Firebase(firebaseUrl),

@@ -5,9 +5,10 @@
   //Scores service used for communicating with the scores REST endpoints
   angular
     .module('dartapp.scores')
-    .service('ScoresFactory', ScoresFactory);
+    .service('scoresService', scoresService);
 
-  function ScoresFactory($firebaseArray, $firebaseObject, firebaseUrl) {
+  scoresService.$inject = ['$firebaseArray', '$firebaseObject', 'firebaseUrl'];
+  function scoresService($firebaseArray, $firebaseObject, firebaseUrl) {
 
     var _url = firebaseUrl + 'scores';
     var _ref = new Firebase(_url);

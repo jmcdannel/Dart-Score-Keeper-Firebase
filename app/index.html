@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="dartapp.scores">
+  <body ng-app="dartapp">
 
     <div ui-view="header"></div>
 
@@ -36,7 +36,10 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="/scripts/app.js"></script>
-    <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js"] -->
+    <!-- modules init -->
+    <!-- include: "type": "js", "files": ["scripts/**/*module*.js"] -->
+    <!-- modules -->
+    <!-- include: "type": "js", "files": ["scripts/**/*.js", "!scripts/*.js", "!scripts/**/*module*.js"] -->
     <!-- endbuild -->
 </body>
 </html>
