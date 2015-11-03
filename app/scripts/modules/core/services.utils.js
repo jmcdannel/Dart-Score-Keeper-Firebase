@@ -1,12 +1,18 @@
+;
+(function() {
+  'use strict';
 
-//Scores service used for communicating with the scores REST endpoints
-angular.module('dartapp.scores').service('Utils', function (viewPathTemplate) {
+  angular
+    .module('dartapp.scores')
+    .service('Utils', Utils);
 
-    return {
-      view: function(_module, viewName) {
-        return viewPathTemplate.format(_module, viewName);
-      }
+  function Utils(viewPathTemplate) {
+
+    this.view = _getViewPath;
+
+    function _getViewPath(_module, viewName) {
+      return viewPathTemplate.format(_module, viewName);
     }
 
   }
-);
+})();

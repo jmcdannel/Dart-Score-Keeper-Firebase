@@ -1,30 +1,32 @@
-'use strict';
+;
+(function() {
+  'use strict';
 
 angular
   .module('dartapp.scores').config(function($stateProvider, $urlRouterProvider, viewPathTemplate) {
 
+    var header = viewPathTemplate.format('core', 'header'),
+      footer = viewPathTemplate.format('core', 'footer'),
+      headerAnon = viewPathTemplate.format('core', 'header.anon'),
+      requireAuth = ['AuthService', function(AuthService) {
+        return AuthService.getRef().$requireAuth();
+      }];
+
     $urlRouterProvider.when('/scores', '/scores/list');
     $urlRouterProvider.otherwise('/login');
-    console.log(viewPathTemplate);
 
     $stateProvider
-
-      //SCORES STATE/ROUTE
+      //SCORES
       .state('scores', {
         abstract: true,
         url: '/scores',
         views: {
-          'header'  : { templateUrl:  viewPathTemplate.format('core', 'header') },
-          'footer'  : { templateUrl:  viewPathTemplate.format('core', 'footer') },
+          'header'  : { templateUrl:  header },
+          'footer'  : { templateUrl:  footer },
           'page'    : {
             controller: function($scope) { },
-            template: '<div ui-view="content" />' ,
-            resolve: {
-              "currentAuth": ['AuthService', function(AuthService) {
-                var authObj = AuthService.getRef();
-                return authObj.$requireAuth();
-              }]
-            }
+            template: '<div ui-view="content" />',
+            resolve: { 'currentAuth': requireAuth }
           }
         }
       })
@@ -47,14 +49,16 @@ angular
         }
       })
 
-      //LOGIN STATE/ROUTE
+      //LOGIN
       .state('login', {
         url: '/login',
         views: {
-          'header'  : { templateUrl:  viewPathTemplate.format('core', 'header.anon') },
-          'page'    : { templateUrl:  viewPathTemplate.format('users', 'login') },
-          'footer'  : { templateUrl:  viewPathTemplate.format('core', 'footer') }
+          'header'  : { templateUrl:  headerAnon },
+          'footer'  : { templateUrl:  footer },
+          'page'    : { templateUrl:  viewPathTemplate.format('users', 'login') }
         }
       });
 
   });
+
+})();

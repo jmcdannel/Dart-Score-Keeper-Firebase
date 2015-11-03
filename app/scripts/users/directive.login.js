@@ -1,19 +1,26 @@
-'use strict';
+;
+(function() {
+  'use strict';
 
-// Score List Directive
-angular.module('dartapp.scores').directive('dsLogin', function (AuthService, Utils, $location) {
-  return {
-		scope: {},
-    templateUrl: Utils.view('users', 'directive.login'),
-    restrict: 'E',
-    link: function postLink(scope, element, attrs) {
-      console.log(AuthService, scope, element, attrs);
+  angular
+    .module('dartapp.scores')
+    .directive('dsLogin', dsLogin);
 
-      scope.githubLogin = function() {
-        AuthService.requestLogin('github').then(function() {
-          $location.path('scores/list');
-        });
-      };
-    }
-  };
-});
+  function dsLogin(AuthService, Utils, $location) {
+    return {
+  		scope: {},
+      templateUrl: Utils.view('users', 'directive.login'),
+      restrict: 'E',
+      link: function postLink(scope, element, attrs) {
+
+        scope.githubLogin = _thirdPartyLogin('github');
+
+        function _thirdPartyLogin(service) {
+          AuthService.requestLogin(service).then(function() {
+            $location.path('scores/list');
+          });
+        }
+      }
+    };
+  }
+})();

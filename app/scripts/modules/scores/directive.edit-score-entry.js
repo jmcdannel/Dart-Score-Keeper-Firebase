@@ -1,27 +1,40 @@
-'use strict';
+;
+(function() {
+  'use strict';
 
-// Creeate Score Entry Directive
-angular.module('dartapp.scores').directive('dsEditScoreEntry', function ($stateParams, $location, ScoresFactory, Utils) {
-	return {
-		scope: {},
-    templateUrl: Utils.view('scores', 'directive.edit'),
-    restrict: 'E',
-    link: function postLink(scope, element, attrs) {
+  // Creeate Score Entry Directive
+  angular
+    .module('dartapp.scores')
+    .directive('dsEditScoreEntry', dsEditScoreEntry);
 
-      scope.score = ScoresFactory.getItem($stateParams.scoreId);
+  function dsEditScoreEntry($stateParams, $location, ScoresFactory, Utils) {
+  	return {
+  		scope: {},
+      templateUrl: Utils.view('scores', 'directive.edit'),
+      restrict: 'E',
+      link: function postLink(scope, element, attrs) {
 
-			scope.update = function () {
-        scope.score.$save();
-        $location.path('scores/list');
-	    };
+        scope.score = _getScore();
+  			scope.update = _update;
+  			scope.remove = _remove;
 
-			scope.remove = function() {
-	      scope.score.$remove();
-        $location.path('scores/list');
-	    };
+        function _getScore() {
+          return ScoresFactory.getItem($stateParams.scoreId);
+        }
+
+        function _update() {
+          scope.score.$save();
+          $location.path('scores/list');
+  	    };
+
+        function _remove() {
+  	      scope.score.$remove();
+          $location.path('scores/list');
+  	    };
 
 
-    }
-  };
+      }
+    };
 
-});
+  }
+})();
