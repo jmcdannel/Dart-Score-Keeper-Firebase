@@ -18,9 +18,9 @@ angular.module('dartapp.scores').service('AuthService', function ($firebaseAuth,
         if (!authData) {
           return null;
         } else {
-          authType = authData.auth.provider;
+          authProvider = authData.auth.provider;
           return {
-              name: authData[authType].displayName || 'Unknown'
+              name: authData[authProvider].displayName || 'Unknown'
           }
         }
       },
