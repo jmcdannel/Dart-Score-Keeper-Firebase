@@ -15,15 +15,19 @@
 
   angular
     .module('dartapp', [
-    'ngAnimate',
-    'ngTouch',
-    'firebase',
-    'ui.router'
+      'dartapp.core',
+      'dartapp.scores',
+      'dartapp.users'
   ]);
 
-  angular
-    .module('dartapp.scores', [
-    'dartapp'
-  ]);
-  
+  // angular
+  //   .module('dartapp.scores', [
+  //   'dartapp'
+  // ]);
+  //
+  // angular
+  //   .module('dartapp.users', [
+  //   'dartapp'
+  // ]);
+
 })();

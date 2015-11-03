@@ -3,7 +3,7 @@
   'use strict';
 
 angular
-  .module('dartapp.scores').config(function($stateProvider, $urlRouterProvider, viewPathTemplate) {
+  .module('dartapp').config(function($stateProvider, $urlRouterProvider, viewPathTemplate) {
 
     var header = viewPathTemplate.format('core', 'header'),
       footer = viewPathTemplate.format('core', 'footer'),

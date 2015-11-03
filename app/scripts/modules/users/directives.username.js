@@ -4,18 +4,23 @@
 
 	// Score List Directive
 	angular
-		.module('dartapp.scores')
+		.module('dartapp.users')
 		.directive('dsUserName', dsUserName);
 
+	dsUserName.$inject = ['AuthService', 'Utils'];
 	function dsUserName(AuthService, Utils) {
-		return {
+		var directive = {
 			scope: {},
 			templateUrl: Utils.view('core', 'directive.username'),
 			restrict: 'AE',
-			link: function postLink(scope, element, attrs) {
-				scope.userData = AuthService.getUser();
-			}
+			link: _link
 		};
+
+		return directive;
+
+		function _link(scope, element, attrs) {
+			scope.userData = AuthService.getUser();
+		}
 	}
 
 })();
