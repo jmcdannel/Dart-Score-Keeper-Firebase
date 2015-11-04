@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Auth Provider</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr data-ng-repeat="user in vm.users">
+      <td data-ng-bind="user.name"></td>
+      <td data-ng-bind="user.provider"></td>
+      <td>
+        <input type="checkbox" ng-model="user.admin" ng-change="vm.toggleAdmin(user)">
+      </td>
+    </tr>
+  </tbody>
+</table>
